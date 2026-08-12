@@ -129,6 +129,33 @@
   }
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
+  /* ===== Elegant image frames (added for real-photo sections) ===== */
+  /* Thin cream "mat" border + soft shadow — used on full-bleed photos
+     (categories, collections, instagram). Border uses border-box sizing
+     (Tailwind Preflight default), so it never changes the tile's size
+     or grid position — purely a visual frame. */
+  .elegant-frame{
+    border:6px solid var(--cream);
+    box-shadow:0 16px 34px -18px rgba(43,10,16,.45);
+  }
+  .elegant-frame-sm{
+    border:5px solid var(--cream);
+    box-shadow:0 10px 22px -12px rgba(43,10,16,.4);
+  }
+  /* Boxed "jewelry cushion" mat — used where a photo sits alone on a
+     card with no frame at all (hero mini-art, editorial art). */
+  .img-box{
+    background:var(--cream);
+    border-radius:18px;
+    padding:10px;
+    box-shadow:0 16px 32px -16px rgba(43,10,16,.4);
+  }
+  .img-box-inner{
+    border-radius:10px;
+    overflow:hidden;
+    width:100%; height:100%;
+  }
+
   .grain{position:absolute; inset:0; opacity:.05; mix-blend-mode:overlay; pointer-events:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
@@ -486,95 +513,85 @@
 
 <script>
 /* ===========================================================
-   PLACEHOLDER ART ENGINE
-   Generates elegant, self-contained SVG illustrations so the
-   page never depends on an external image host. Swap these
-   data-URIs for real product photography when it's ready.
+   PRODUCT IMAGES
+   -----------------------------------------------------------
+   Every image on the site comes from this one block. Each entry
+   has an `img` field (products also have `img2`, used for the
+   hover-swap effect on the Best Sellers cards).
+
+   TO USE YOUR OWN PHOTOS:
+     1. Put your images in an /images folder next to this HTML
+        file (e.g. images/products/aura-vanki-ring.jpg) — or host
+        them anywhere and copy the full https:// link.
+     2. Replace the string inside the matching `img` / `img2`
+        field below with that path or link. That's it — nothing
+        else in the page needs to change.
+
+   Until you swap them, these point to real stock photography so
+   the site looks correct out of the box. If a link ever breaks,
+   the onerror handler on each <img> falls back to FALLBACK_IMG
+   below instead of showing a broken-image icon.
 =========================================================== */
-const PALETTES = {
-  choc:       { from:'#4A171F', to:'#230810', icon:'#D8B784', ring:'rgba(248,237,234,.10)', spark:'#E8A9BC' },
-  terracotta: { from:'#E3A0B2', to:'#B65C74', icon:'#4A121B', ring:'rgba(43,10,16,.16)',    spark:'#7A2A38' },
-  cream:      { from:'#F8EEEC', to:'#F0D9DA', icon:'#8A2C41', ring:'rgba(51,20,26,.10)',    spark:'#C9A46A' },
-};
+const FALLBACK_IMG = "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80&auto=format&fit=crop";
 
-const ICONS = {
-  ring:      '<circle cx="0" cy="4" r="10"/><path d="M0 -10 L-4 -16 L0 -21 L4 -16 Z"/>',
-  vanki:     '<circle cx="0" cy="5" r="9"/><path d="M-6 -12 L0 -20 L6 -12 Z"/><circle cx="0" cy="-13" r="2"/>',
-  thumb:     '<circle cx="0" cy="4" r="11"/><path d="M-3 -12 L0 -18 L3 -12 Z"/><path d="M-7 -9 L-3 -12 M7 -9 L3 -12"/>',
-  hoop:      '<circle cx="-6" cy="0" r="8"/><circle cx="6" cy="0" r="8"/>',
-  necklace:  '<path d="M-16 -14 Q0 12 16 -14"/><path d="M0 6 L-4 14 L0 21 L4 14 Z"/>',
-  nosepin:   '<circle cx="0" cy="0" r="2.6"/><path d="M0 3 Q3 8 1 12"/>',
-  bracelet:  '<rect x="-16" y="-8" width="32" height="16" rx="8"/><path d="M-8 -8 V8 M0 -8 V8 M8 -8 V8"/>',
-  bangle:    '<circle cx="0" cy="0" r="14"/><circle cx="0" cy="0" r="9"/>',
-  statement: '<circle cx="0" cy="0" r="15"/><circle cx="0" cy="0" r="6"/><circle cx="0" cy="-15" r="1.6" fill="currentColor" stroke="none"/><circle cx="0" cy="15" r="1.6" fill="currentColor" stroke="none"/><circle cx="-15" cy="0" r="1.6" fill="currentColor" stroke="none"/><circle cx="15" cy="0" r="1.6" fill="currentColor" stroke="none"/>',
-  bust:      '<path d="M-11 20 Q-11 -1 0 -5 Q11 -1 11 20"/><circle cx="0" cy="-15" r="8.5"/><path d="M-4 -3 Q0 4 4 -3"/>',
-  gem:       '<path d="M-14 -8 H14 L20 2 L0 22 L-20 2 Z"/><path d="M-20 2 H20 M-8 -8 L-4 2 L0 22 M8 -8 L4 2 L0 22"/>',
-};
-
-function ph(iconKey, paletteKey, seed, ratio){
-  const p = PALETTES[paletteKey];
-  const w = 400, h = Math.round(400 * (ratio || 1.25));
-  const cx = w/2, cy = h/2;
-  const rot = (seed * 23) % 360;
-  const s1x = 40 + (seed*17)%(w-80), s1y = 40 + (seed*29)%(h-80);
-  const s2x = w-40-(seed*13)%(w-80), s2y = h-40-(seed*19)%(h-80);
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">
-    <defs>
-      <linearGradient id="g${seed}${iconKey}" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="${p.from}"/>
-        <stop offset="1" stop-color="${p.to}"/>
-      </linearGradient>
-    </defs>
-    <rect width="${w}" height="${h}" fill="url(#g${seed}${iconKey})"/>
-    <circle cx="${cx}" cy="${cy}" r="${Math.min(w,h)*0.38}" fill="none" stroke="${p.ring}" stroke-width="1"/>
-    <circle cx="${cx}" cy="${cy}" r="${Math.min(w,h)*0.29}" fill="none" stroke="${p.ring}" stroke-width="1"/>
-    <g transform="translate(${cx},${cy}) rotate(${rot*0.12}) scale(3.1)" stroke="${p.icon}" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      ${ICONS[iconKey] || ICONS.ring}
-    </g>
-    <g fill="${p.spark}" opacity=".6">
-      <circle cx="${s1x}" cy="${s1y}" r="1.8"/>
-      <circle cx="${s2x}" cy="${s2y}" r="1.3"/>
-    </g>
-  </svg>`;
-  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-}
-
-function phInline(iconKey, paletteKey, seed, extraClass){
-  return `<img src="${ph(iconKey, paletteKey, seed, 1)}" alt="" class="w-full h-full object-contain ${extraClass||''}" loading="lazy" />`;
+function imgTag(src, alt, cls){
+  return `<img src="${src}" alt="${alt}" class="${cls||''}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK_IMG}';" />`;
 }
 
 /* ===========================================================
    DATA
 =========================================================== */
 const categories = [
-  { name: "Rings", icon: "ring", pal: "terracotta", seed: 1 },
-  { name: "Thumb Rings", icon: "thumb", pal: "choc", seed: 2 },
-  { name: "Vanki Rings", icon: "vanki", pal: "terracotta", seed: 3 },
-  { name: "Necklaces", icon: "necklace", pal: "choc", seed: 4 },
-  { name: "Earrings", icon: "hoop", pal: "terracotta", seed: 5 },
-  { name: "Nose Pins", icon: "nosepin", pal: "choc", seed: 6 },
-  { name: "Bracelets", icon: "bracelet", pal: "terracotta", seed: 7 },
-  { name: "Statement Bangles", icon: "statement", pal: "choc", seed: 8 },
+  { name: "Rings", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80&auto=format&fit=crop" },
+  { name: "Thumb Rings", img: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80&auto=format&fit=crop" },
+  { name: "Vanki Rings", img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80&auto=format&fit=crop" },
+  { name: "Necklaces", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80&auto=format&fit=crop" },
+  { name: "Earrings", img: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80&auto=format&fit=crop" },
+  { name: "Nose Pins", img: "https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=600&q=80&auto=format&fit=crop" },
+  { name: "Bracelets", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80&auto=format&fit=crop" },
+  { name: "Statement Bangles", img: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=600&q=80&auto=format&fit=crop" },
 ];
 
 const products = [
-  { name: "Aura Vanki Ring", tag: "Ring", price: "₹1,890", rating: 4.9, icon: "vanki", seed: 11 },
-  { name: "Lune Hoop Earrings", tag: "Earrings", price: "₹1,450", rating: 4.8, icon: "hoop", seed: 12 },
-  { name: "Solstice Necklace", tag: "Necklace", price: "₹2,290", rating: 5.0, icon: "necklace", seed: 13 },
-  { name: "Petal Nose Pin", tag: "Nose Pin", price: "₹890", rating: 4.7, icon: "nosepin", seed: 14 },
-  { name: "Coil Thumb Ring", tag: "Ring", price: "₹1,190", rating: 4.9, icon: "thumb", seed: 15 },
-  { name: "Meridian Bracelet", tag: "Bracelet", price: "₹1,690", rating: 4.8, icon: "bracelet", seed: 16 },
-  { name: "Dune Statement Bangle", tag: "Bangle", price: "₹2,690", rating: 4.9, icon: "statement", seed: 17 },
-  { name: "Halo Studs", tag: "Earrings", price: "₹990", rating: 4.9, icon: "hoop", seed: 18 },
+  { name: "Aura Vanki Ring", tag: "Ring", price: "₹1,890", rating: 4.9,
+    img:  "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80&auto=format&fit=crop",
+    img2: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80&auto=format&fit=crop" },
+  { name: "Lune Hoop Earrings", tag: "Earrings", price: "₹1,450", rating: 4.8,
+    img:  "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80&auto=format&fit=crop",
+    img2: "https://images.unsplash.com/photo-1602752250015-52934bc45613?w=600&q=80&auto=format&fit=crop" },
+  { name: "Solstice Necklace", tag: "Necklace", price: "₹2,290", rating: 5.0,
+    img:  "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80&auto=format&fit=crop",
+    img2: "https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=600&q=80&auto=format&fit=crop" },
+  { name: "Petal Nose Pin", tag: "Nose Pin", price: "₹890", rating: 4.7,
+    img:  "https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=600&q=80&auto=format&fit=crop",
+    img2: "https://images.unsplash.com/photo-1631982690223-8aa4c6e0b3f9?w=600&q=80&auto=format&fit=crop" },
+  { name: "Coil Thumb Ring", tag: "Ring", price: "₹1,190", rating: 4.9,
+    img:  "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80&auto=format&fit=crop",
+    img2: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80&auto=format&fit=crop" },
+  { name: "Meridian Bracelet", tag: "Bracelet", price: "₹1,690", rating: 4.8,
+    img:  "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80&auto=format&fit=crop",
+    img2: "https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=600&q=80&auto=format&fit=crop" },
+  { name: "Dune Statement Bangle", tag: "Bangle", price: "₹2,690", rating: 4.9,
+    img:  "https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=600&q=80&auto=format&fit=crop",
+    img2: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=600&q=80&auto=format&fit=crop" },
+  { name: "Halo Studs", tag: "Earrings", price: "₹990", rating: 4.9,
+    img:  "https://images.unsplash.com/photo-1602752250015-52934bc45613?w=600&q=80&auto=format&fit=crop",
+    img2: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80&auto=format&fit=crop" },
 ];
 
 const collections = [
-  { name: "Minimal Luxe", sub: "Everyday minimal pieces", icon: "ring", pal: "choc", big: true, seed: 21 },
-  { name: "Statement Edit", icon: "statement", pal: "terracotta", seed: 22 },
-  { name: "Everyday Gold", icon: "bangle", pal: "choc", seed: 23 },
-  { name: "Office Essentials", icon: "hoop", pal: "terracotta", seed: 24 },
-  { name: "Wedding Guest", icon: "gem", pal: "choc", seed: 25 },
-  { name: "Weekend Edit", icon: "necklace", pal: "terracotta", seed: 26 },
+  { name: "Minimal Luxe", sub: "Everyday minimal pieces", big: true,
+    img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80&auto=format&fit=crop" },
+  { name: "Statement Edit",
+    img: "https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=900&q=80&auto=format&fit=crop" },
+  { name: "Everyday Gold",
+    img: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=700&q=80&auto=format&fit=crop" },
+  { name: "Office Essentials",
+    img: "https://images.unsplash.com/photo-1602752250015-52934bc45613?w=700&q=80&auto=format&fit=crop" },
+  { name: "Wedding Guest",
+    img: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=900&q=80&auto=format&fit=crop" },
+  { name: "Weekend Edit",
+    img: "https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=900&q=80&auto=format&fit=crop" },
 ];
 
 const benefits = [
@@ -607,26 +624,37 @@ const testimonials = [
 ];
 
 const igData = [
-  { icon: "ring", pal: "choc", seed: 31 }, { icon: "hoop", pal: "terracotta", seed: 32 },
-  { icon: "necklace", pal: "cream", seed: 33 }, { icon: "bangle", pal: "choc", seed: 34 },
-  { icon: "vanki", pal: "terracotta", seed: 35 }, { icon: "bracelet", pal: "cream", seed: 36 },
+  { img: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=400&q=70&auto=format&fit=crop" },
+  { img: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=70&auto=format&fit=crop" },
+  { img: "https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=400&q=70&auto=format&fit=crop" },
+  { img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=70&auto=format&fit=crop" },
+  { img: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=400&q=70&auto=format&fit=crop" },
+  { img: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=400&q=70&auto=format&fit=crop" },
 ];
 
 /* ===========================================================
-   RENDER: hero art
+   RENDER: hero images
 =========================================================== */
-document.getElementById('heroProductArt').innerHTML = phInline('vanki', 'cream', 40);
-document.getElementById('heroBustArt').innerHTML = phInline('bust', 'terracotta', 41);
-document.getElementById('heroBangleArt').innerHTML = phInline('bangle', 'choc', 42);
-document.getElementById('editorialArt').innerHTML = `<div class="w-full h-full rounded-[24px] overflow-hidden">${phInline('necklace','terracotta',43)}</div>`;
+document.getElementById('heroProductArt').innerHTML = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(
+  "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80&auto=format&fit=crop",
+  "Gold Plated Vanki Ring", "w-full h-full object-contain")}</div></div>`;
+document.getElementById('heroBustArt').innerHTML = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(
+  "https://images.unsplash.com/photo-1518391846015-55a9cc003b25?w=500&q=80&auto=format&fit=crop",
+  "Model wearing HAEINS jewellery", "w-full h-full object-cover")}</div></div>`;
+document.getElementById('heroBangleArt').innerHTML = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(
+  "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&q=80&auto=format&fit=crop",
+  "Gold bangle detail", "w-full h-full object-cover")}</div></div>`;
+document.getElementById('editorialArt').innerHTML = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(
+  "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=80&auto=format&fit=crop",
+  "Model wearing layered HAEINS necklaces", "w-full h-full object-cover")}</div></div>`;
 
 /* ===========================================================
    RENDER: Categories
 =========================================================== */
 document.getElementById('categoryGrid').innerHTML = categories.map((c,i)=>`
   <a href="#" class="group reveal" style="transition-delay:${i*70}ms">
-    <div class="rounded-[22px] overflow-hidden aspect-[4/5] img-zoom relative" style="background:var(--choc2);">
-      <img src="${ph(c.icon, c.pal, c.seed)}" alt="${c.name}" class="w-full h-full object-cover" loading="lazy" />
+    <div class="rounded-[22px] overflow-hidden aspect-[4/5] img-zoom relative elegant-frame" style="background:var(--choc2);">
+      ${imgTag(c.img, c.name, "w-full h-full object-cover")}
       <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 55%,rgba(10,6,3,.65));"></div>
       <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-cream">
         <span class="serif italic text-lg">${c.name}</span>
@@ -644,9 +672,9 @@ document.getElementById('categoryGrid').innerHTML = categories.map((c,i)=>`
 let cartCount = 0;
 document.getElementById('productGrid').innerHTML = products.map((p,i)=>`
   <div class="group reveal rounded-[22px] p-3 md:p-4" style="background:var(--cream); transition-delay:${(i%4)*70}ms">
-    <div class="relative rounded-[15px] overflow-hidden aspect-[4/5] mb-3 card-swap">
-      <img src="${ph(p.icon,'terracotta',p.seed)}" alt="${p.name}" class="img-a w-full h-full object-cover absolute inset-0" loading="lazy" />
-      <img src="${ph(p.icon,'choc',p.seed+50)}" alt="${p.name} alternate" class="img-b w-full h-full object-cover absolute inset-0" loading="lazy" />
+    <div class="relative rounded-[15px] overflow-hidden aspect-[4/5] mb-3 card-swap" style="border:1px solid rgba(51,20,26,.08);">
+      ${imgTag(p.img, p.name, "img-a w-full h-full object-cover absolute inset-0")}
+      ${imgTag(p.img2, p.name + " alternate view", "img-b w-full h-full object-cover absolute inset-0")}
       <span class="absolute top-2.5 left-2.5 text-[9px] tracking-[0.1em] uppercase px-2.5 py-1 rounded-full z-10" style="background:rgba(21,14,9,.75); color:var(--cream);">${p.tag}</span>
       <button class="wishlist-btn absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-cream/90 flex items-center justify-center z-10 transition-transform hover:scale-110" aria-label="Add to wishlist">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#33141A" stroke-width="1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
@@ -685,22 +713,22 @@ document.getElementById('benefitsGrid').innerHTML = benefits.map((b,i)=>`
 =========================================================== */
 const cg = document.getElementById('collectionGrid');
 cg.innerHTML = `
-  <div class="md:col-span-3 md:row-span-2 rounded-[26px] overflow-hidden relative min-h-[280px] md:min-h-full img-zoom reveal">
-    <img src="${ph(collections[0].icon, collections[0].pal, collections[0].seed, 1.4)}" class="absolute inset-0 w-full h-full object-cover" alt="${collections[0].name}">
+  <div class="md:col-span-3 md:row-span-2 rounded-[26px] overflow-hidden relative min-h-[280px] md:min-h-full img-zoom reveal elegant-frame">
+    ${imgTag(collections[0].img, collections[0].name, "absolute inset-0 w-full h-full object-cover")}
     <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 40%,rgba(10,6,3,.65));"></div>
     <div class="absolute bottom-6 left-6 text-cream">
       <p class="serif italic text-2xl md:text-3xl">${collections[0].name}</p>
       <p class="text-[11px] tracking-[0.15em] uppercase opacity-80 mt-1">${collections[0].sub}</p>
     </div>
   </div>
-  <div class="md:col-span-3 rounded-[26px] overflow-hidden relative min-h-[140px] img-zoom reveal" style="transition-delay:.05s">
-    <img src="${ph(collections[1].icon, collections[1].pal, collections[1].seed, 0.55)}" class="absolute inset-0 w-full h-full object-cover" alt="${collections[1].name}">
+  <div class="md:col-span-3 rounded-[26px] overflow-hidden relative min-h-[140px] img-zoom reveal elegant-frame" style="transition-delay:.05s">
+    ${imgTag(collections[1].img, collections[1].name, "absolute inset-0 w-full h-full object-cover")}
     <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 30%,rgba(10,6,3,.6));"></div>
     <div class="absolute bottom-5 left-6 text-cream"><p class="serif italic text-xl">${collections[1].name}</p></div>
   </div>
   ${collections.slice(2).map((c,i)=>`
-  <div class="rounded-[26px] overflow-hidden relative min-h-[140px] img-zoom reveal" style="transition-delay:${.1+i*.05}s">
-    <img src="${ph(c.icon, c.pal, c.seed, 0.9)}" class="absolute inset-0 w-full h-full object-cover" alt="${c.name}">
+  <div class="rounded-[26px] overflow-hidden relative min-h-[140px] img-zoom reveal elegant-frame-sm" style="transition-delay:${.1+i*.05}s">
+    ${imgTag(c.img, c.name, "absolute inset-0 w-full h-full object-cover")}
     <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 30%,rgba(10,6,3,.6));"></div>
     <div class="absolute bottom-5 left-5 text-cream"><p class="serif italic text-lg">${c.name}</p></div>
   </div>`).join('')}
@@ -710,8 +738,8 @@ cg.innerHTML = `
    RENDER: Instagram grid
 =========================================================== */
 document.getElementById('igGrid').innerHTML = igData.map((d,i)=>`
-  <a href="#" class="img-zoom rounded-[16px] overflow-hidden aspect-square block reveal" style="transition-delay:${i*50}ms">
-    <img src="${ph(d.icon, d.pal, d.seed, 1)}" alt="HAEINS Instagram post ${i+1}" class="w-full h-full object-cover" loading="lazy" />
+  <a href="#" class="img-zoom rounded-[16px] overflow-hidden aspect-square block reveal elegant-frame-sm" style="transition-delay:${i*50}ms">
+    ${imgTag(d.img, `HAEINS Instagram post ${i+1}`, "w-full h-full object-cover")}
   </a>
 `).join('');
 
