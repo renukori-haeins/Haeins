@@ -71,30 +71,12 @@ const HERO_IMAGES = {
    Recommended size: 500×625 px portrait, cropped centre.
 ================================================================= */
 const categories = [
-  { name: "Rings",
-    img: "images/categories/rings.jpg" },
-  //       ↑ Replace with your Rings category photo
-
-  { name: "Thumb Rings",
-    img: "images/categories/thumb-rings.jpg" },
-
-  { name: "Vanki Rings",
-    img: "images/categories/vanki-rings.jpg" },
-
-  { name: "Necklaces",
-    img: "images/categories/necklaces.jpg" },
-
+  
   { name: "Earrings",
     img: "images/categories/earrings.jpg" },
 
-  { name: "Nose Pins",
-    img: "images/categories/nose-pins.jpg" },
-
   { name: "Bracelets",
     img: "images/categories/bracelets.jpg" },
-
-  { name: "Statement Bangles",
-    img: "images/categories/statement-bangles.jpg" },
 ];
 
 
@@ -106,39 +88,21 @@ const categories = [
 ================================================================= */
 const products = [
 
-  { name: "Aura Vanki Ring", tag: "Ring", price: "₹1,890", rating: 4.9,
-    img:  "images/products/aura-vanki-ring-front.jpg",
-    img2: "images/products/aura-vanki-ring-hover.jpg" },
-  // ↑ img  → front-facing shot of the Aura Vanki Ring
-  // ↑ img2 → alternate angle (side / worn on hand) shown on hover
-
   { name: "Lune Hoop Earrings", tag: "Earrings", price: "₹1,450", rating: 4.8,
     img:  "images/products/lune-hoop-earrings-front.jpg",
     img2: "images/products/lune-hoop-earrings-hover.jpg" },
-
-  { name: "Solstice Necklace", tag: "Necklace", price: "₹2,290", rating: 5.0,
-    img:  "images/products/solstice-necklace-front.jpg",
-    img2: "images/products/solstice-necklace-hover.jpg" },
-
-  { name: "Petal Nose Pin", tag: "Nose Pin", price: "₹890", rating: 4.7,
-    img:  "images/products/petal-nose-pin-front.jpg",
-    img2: "images/products/petal-nose-pin-hover.jpg" },
-
-  { name: "Coil Thumb Ring", tag: "Ring", price: "₹1,190", rating: 4.9,
-    img:  "images/products/coil-thumb-ring-front.jpg",
-    img2: "images/products/coil-thumb-ring-hover.jpg" },
-
-  { name: "Meridian Bracelet", tag: "Bracelet", price: "₹1,690", rating: 4.8,
-    img:  "images/products/meridian-bracelet-front.jpg",
-    img2: "images/products/meridian-bracelet-hover.jpg" },
-
-  { name: "Dune Statement Bangle", tag: "Bangle", price: "₹2,690", rating: 4.9,
-    img:  "images/products/dune-statement-bangle-front.jpg",
-    img2: "images/products/dune-statement-bangle-hover.jpg" },
-
+   
   { name: "Halo Studs", tag: "Earrings", price: "₹990", rating: 4.9,
     img:  "images/products/halo-studs-front.jpg",
     img2: "images/products/halo-studs-hover.jpg" },
+   
+  { name: "Halo Studs", tag: "Earrings", price: "₹990", rating: 4.9,
+    img:  "images/products/halo-studs-front.jpg",
+    img2: "images/products/halo-studs-hover.jpg" },
+   
+  { name: "Meridian Bracelet", tag: "Bracelet", price: "₹1,690", rating: 4.8,
+    img:  "images/products/meridian-bracelet-front.jpg",
+    img2: "images/products/meridian-bracelet-hover.jpg" },
 
 ];
 
