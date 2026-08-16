@@ -1,146 +1,246 @@
-/* ===========================================================
-   PRODUCT IMAGES
-   -----------------------------------------------------------
-   Every image on the site comes from this one block. Each entry
-   has an `img` field (products also have `img2`, used for the
-   hover-swap effect on the Best Sellers cards).
+/* =================================================================
+   HAEINS — script.js
+   All logic for index.html.
+   ---------------------------------------------------------------
+   ██████████████████████████████████████████████████████████████
+   HOW TO REPLACE IMAGES WITH YOUR OWN
+   ██████████████████████████████████████████████████████████████
 
-   TO USE YOUR OWN PHOTOS:
-     1. Put your images in an /images folder next to this HTML
-        file (e.g. images/products/aura-vanki-ring.jpg) — or host
-        them anywhere and copy the full https:// link.
-     2. Replace the string inside the matching `img` / `img2`
-        field below with that path or link. That's it — nothing
-        else in the page needs to change.
+   OPTION A — LOCAL FILES (recommended for final launch)
+     1. Create a folder called  images/  next to index.html
+        Suggested sub-folders:
+          images/hero/
+          images/categories/
+          images/products/
+          images/collections/
+          images/instagram/
+     2. Copy your .jpg / .webp / .png files into those folders.
+     3. In every "img:" field below, replace the full https://
+        URL with your relative path, e.g.:
+          "images/products/aura-vanki-ring.jpg"
 
-   Until you swap them, these point to real stock photography so
-   the site looks correct out of the box. If a link ever breaks,
-   the onerror handler on each <img> falls back to FALLBACK_IMG
-   below instead of showing a broken-image icon.
-=========================================================== */
-const FALLBACK_IMG = "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80&auto=format&fit=crop";
+   OPTION B — HOSTED IMAGES (Google Drive, Cloudinary, etc.)
+     Replace the URL string with the direct download/public link.
+     Make sure the link ends with an image extension or the CDN
+     returns an image content-type, not an HTML page.
+
+   FALLBACK IMAGE
+     If any image fails to load, the site shows FALLBACK_IMG
+     instead of a broken icon. Set it to your logo or a neutral
+     product shot.
+================================================================= */
+
+const FALLBACK_IMG = "images/fallback.jpg";
+// ↑ Replace with your own fallback photo path or URL.
+//   Until you do, the site falls back to a plain transparent GIF.
 
 function imgTag(src, alt, cls){
-  return `<img src="${src}" alt="${alt}" class="${cls||''}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK_IMG}';" />`;
+  return `<img src="${src}" alt="${alt}" class="${cls||''}" loading="lazy"
+    onerror="this.onerror=null;this.src='${FALLBACK_IMG}';" />`;
 }
 
-/* ===========================================================
-   DATA
-=========================================================== */
+
+/* =================================================================
+   SECTION 1 · HERO IMAGES  (4 images)
+   Slot positions: see the hero bento grid at the top of the page.
+   Recommended size: min 800×1000 px, portrait or square.
+================================================================= */
+const HERO_IMAGES = {
+
+  // ── Slot 1: MAIN PRODUCT TILE (cream card, centre of hero)
+  // Best choice: close-up of your hero product on a white/cream surface.
+  heroProduct: "images/hero/hero-product.jpg",
+
+  // ── Slot 2: MODEL TILE (terracotta / pink card — the "18K Gold Plated" tile)
+  // Best choice: model wearing HAEINS jewellery, warm background.
+  heroBust:    "images/hero/hero-model.jpg",
+
+  // ── Slot 3: DETAIL TILE (dark card — "Designed by Renu Kori")
+  // Best choice: close macro shot of a bangle or ring against dark fabric.
+  heroBangle:  "images/hero/hero-detail.jpg",
+
+  // ── Slot 4: EDITORIAL BANNER (the full-width pink banner mid-page)
+  // Best choice: lifestyle shot, model or flat-lay, wide aspect (16:9 or wider).
+  editorial:   "images/hero/hero-editorial.jpg",
+
+};
+
+
+/* =================================================================
+   SECTION 2 · SHOP BY CATEGORY  (8 tiles, one per category)
+   Recommended size: 500×625 px portrait, cropped centre.
+================================================================= */
 const categories = [
-  { name: "Rings", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80&auto=format&fit=crop" },
-  { name: "Thumb Rings", img: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80&auto=format&fit=crop" },
-  { name: "Vanki Rings", img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80&auto=format&fit=crop" },
-  { name: "Necklaces", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80&auto=format&fit=crop" },
-  { name: "Earrings", img: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80&auto=format&fit=crop" },
-  { name: "Nose Pins", img: "https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=600&q=80&auto=format&fit=crop" },
-  { name: "Bracelets", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80&auto=format&fit=crop" },
-  { name: "Statement Bangles", img: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=600&q=80&auto=format&fit=crop" },
+  { name: "Rings",
+    img: "images/categories/rings.jpg" },
+  //       ↑ Replace with your Rings category photo
+
+  { name: "Thumb Rings",
+    img: "images/categories/thumb-rings.jpg" },
+
+  { name: "Vanki Rings",
+    img: "images/categories/vanki-rings.jpg" },
+
+  { name: "Necklaces",
+    img: "images/categories/necklaces.jpg" },
+
+  { name: "Earrings",
+    img: "images/categories/earrings.jpg" },
+
+  { name: "Nose Pins",
+    img: "images/categories/nose-pins.jpg" },
+
+  { name: "Bracelets",
+    img: "images/categories/bracelets.jpg" },
+
+  { name: "Statement Bangles",
+    img: "images/categories/statement-bangles.jpg" },
 ];
 
+
+/* =================================================================
+   SECTION 3 · BEST SELLERS  (8 products × 2 images each)
+   img  = front / default photo shown on the card
+   img2 = hover-swap photo (shown when customer hovers the card)
+   Recommended size: 600×750 px portrait, consistent crop.
+================================================================= */
 const products = [
+
   { name: "Aura Vanki Ring", tag: "Ring", price: "₹1,890", rating: 4.9,
-    img:  "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80&auto=format&fit=crop" },
+    img:  "images/products/aura-vanki-ring-front.jpg",
+    img2: "images/products/aura-vanki-ring-hover.jpg" },
+  // ↑ img  → front-facing shot of the Aura Vanki Ring
+  // ↑ img2 → alternate angle (side / worn on hand) shown on hover
+
   { name: "Lune Hoop Earrings", tag: "Earrings", price: "₹1,450", rating: 4.8,
-    img:  "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1602752250015-52934bc45613?w=600&q=80&auto=format&fit=crop" },
+    img:  "images/products/lune-hoop-earrings-front.jpg",
+    img2: "images/products/lune-hoop-earrings-hover.jpg" },
+
   { name: "Solstice Necklace", tag: "Necklace", price: "₹2,290", rating: 5.0,
-    img:  "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=600&q=80&auto=format&fit=crop" },
+    img:  "images/products/solstice-necklace-front.jpg",
+    img2: "images/products/solstice-necklace-hover.jpg" },
+
   { name: "Petal Nose Pin", tag: "Nose Pin", price: "₹890", rating: 4.7,
-    img:  "https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=600&q=80&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1631982690223-8aa4c6e0b3f9?w=600&q=80&auto=format&fit=crop" },
+    img:  "images/products/petal-nose-pin-front.jpg",
+    img2: "images/products/petal-nose-pin-hover.jpg" },
+
   { name: "Coil Thumb Ring", tag: "Ring", price: "₹1,190", rating: 4.9,
-    img:  "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80&auto=format&fit=crop" },
+    img:  "images/products/coil-thumb-ring-front.jpg",
+    img2: "images/products/coil-thumb-ring-hover.jpg" },
+
   { name: "Meridian Bracelet", tag: "Bracelet", price: "₹1,690", rating: 4.8,
-    img:  "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=600&q=80&auto=format&fit=crop" },
+    img:  "images/products/meridian-bracelet-front.jpg",
+    img2: "images/products/meridian-bracelet-hover.jpg" },
+
   { name: "Dune Statement Bangle", tag: "Bangle", price: "₹2,690", rating: 4.9,
-    img:  "https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=600&q=80&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=600&q=80&auto=format&fit=crop" },
+    img:  "images/products/dune-statement-bangle-front.jpg",
+    img2: "images/products/dune-statement-bangle-hover.jpg" },
+
   { name: "Halo Studs", tag: "Earrings", price: "₹990", rating: 4.9,
-    img:  "https://images.unsplash.com/photo-1602752250015-52934bc45613?w=600&q=80&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80&auto=format&fit=crop" },
+    img:  "images/products/halo-studs-front.jpg",
+    img2: "images/products/halo-studs-hover.jpg" },
+
 ];
 
+
+/* =================================================================
+   SECTION 4 · COLLECTIONS BENTO  (6 tiles)
+   The first entry (Minimal Luxe) is the big double-height tile.
+   Recommended sizes:
+     [0] Minimal Luxe  → 900×1200 px  (tall portrait)
+     [1] Statement Edit → 900×500 px  (landscape)
+     [2–5] small tiles  → 700×700 px  (square)
+================================================================= */
 const collections = [
+
   { name: "Minimal Luxe", sub: "Everyday minimal pieces", big: true,
-    img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80&auto=format&fit=crop" },
+    img: "images/collections/minimal-luxe.jpg" },
+  // ↑ Big left tile — use a tall lifestyle / model shot
+
   { name: "Statement Edit",
-    img: "https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=900&q=80&auto=format&fit=crop" },
+    img: "images/collections/statement-edit.jpg" },
+
   { name: "Everyday Gold",
-    img: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=700&q=80&auto=format&fit=crop" },
+    img: "images/collections/everyday-gold.jpg" },
+
   { name: "Office Essentials",
-    img: "https://images.unsplash.com/photo-1602752250015-52934bc45613?w=700&q=80&auto=format&fit=crop" },
+    img: "images/collections/office-essentials.jpg" },
+
   { name: "Wedding Guest",
-    img: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=900&q=80&auto=format&fit=crop" },
+    img: "images/collections/wedding-guest.jpg" },
+
   { name: "Weekend Edit",
-    img: "https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=900&q=80&auto=format&fit=crop" },
+    img: "images/collections/weekend-edit.jpg" },
+
 ];
 
+
+/* =================================================================
+   SECTION 5 · INSTAGRAM / GALLERY GRID  (6 square tiles)
+   Recommended size: 400×400 px square.
+   These link to # by default — change the href in igData
+   to your actual Instagram post URLs if you want them clickable.
+================================================================= */
+const igData = [
+  { img: "images/instagram/ig-1.jpg", href: "#" },
+  { img: "images/instagram/ig-2.jpg", href: "#" },
+  { img: "images/instagram/ig-3.jpg", href: "#" },
+  { img: "images/instagram/ig-4.jpg", href: "#" },
+  { img: "images/instagram/ig-5.jpg", href: "#" },
+  { img: "images/instagram/ig-6.jpg", href: "#" },
+  // ↑ Replace each path with your own Instagram photo
+  //   and each href with the post's Instagram URL.
+];
+
+
+/* =================================================================
+   STATIC DATA — no images here, edit text as needed
+================================================================= */
 const benefits = [
-  { t: "Sweat Proof", icon: "droplet" },
-  { t: "Waterproof", icon: "waves" },
-  { t: "Anti Tarnish", icon: "shield" },
-  { t: "Stainless Steel", icon: "hex" },
-  { t: "Gold Plated", icon: "gem" },
-  { t: "Hypoallergenic", icon: "heart" },
-  { t: "Lightweight", icon: "feather" },
-  { t: "Everyday Luxury", icon: "circle" },
+  { t: "Sweat Proof",     icon: "droplet" },
+  { t: "Waterproof",      icon: "waves"   },
+  { t: "Anti Tarnish",    icon: "shield"  },
+  { t: "Stainless Steel", icon: "hex"     },
+  { t: "Gold Plated",     icon: "gem"     },
+  { t: "Hypoallergenic",  icon: "heart"   },
+  { t: "Lightweight",     icon: "feather" },
+  { t: "Everyday Luxury", icon: "circle"  },
 ];
 
 const benefitIcons = {
   droplet: '<path d="M12 2s6 7 6 11.5A6 6 0 1 1 6 13.5C6 9 12 2 12 2Z"/>',
-  waves: '<path d="M2 12c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/><path d="M2 17c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/>',
-  shield: '<path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/>',
-  hex: '<path d="M12 2 20 7v10l-8 5-8-5V7l8-5Z"/>',
-  gem: '<path d="M6 3h12l4 6-10 12L2 9Z"/><path d="M2 9h20M9 3l2 6-2 12M15 3l-2 6 2 12"/>',
-  heart: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/>',
+  waves:   '<path d="M2 12c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/><path d="M2 17c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/>',
+  shield:  '<path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/>',
+  hex:     '<path d="M12 2 20 7v10l-8 5-8-5V7l8-5Z"/>',
+  gem:     '<path d="M6 3h12l4 6-10 12L2 9Z"/><path d="M2 9h20M9 3l2 6-2 12M15 3l-2 6 2 12"/>',
+  heart:   '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/>',
   feather: '<path d="M20 2 9 13"/><path d="M14 3a17 17 0 0 0-9 16H3a17 17 0 0 1 8-15"/><path d="M4 21c1-3.5 2.5-5.5 5-7"/>',
-  circle: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>',
+  circle:  '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>',
 };
 
 const testimonials = [
-  { name: "Ananya R.", role: "Verified Buyer", text: "I've worn my Vanki ring every single day for four months — showers, gym, everything — and it still looks brand new. This is what everyday luxury should feel like." },
-  { name: "Meher K.", role: "Verified Buyer", text: "Finally jewellery that doesn't turn my skin green. The Solstice necklace has become part of my daily uniform, from meetings to dinners." },
+  { name: "Ananya R.",  role: "Verified Buyer", text: "I've worn my Vanki ring every single day for four months — showers, gym, everything — and it still looks brand new. This is what everyday luxury should feel like." },
+  { name: "Meher K.",   role: "Verified Buyer", text: "Finally jewellery that doesn't turn my skin green. The Solstice necklace has become part of my daily uniform, from meetings to dinners." },
   { name: "Ishita P.", role: "Verified Buyer", text: "HAEINS pieces photograph beautifully but feel even better in person. Renu clearly designs for women who actually live in their jewellery." },
-  { name: "Sana V.", role: "Verified Buyer", text: "Lightweight, elegant, and it hasn't tarnished once. Worth every rupee — I've since gifted three sets to friends." },
+  { name: "Sana V.",    role: "Verified Buyer", text: "Lightweight, elegant, and it hasn't tarnished once. Worth every rupee — I've since gifted three sets to friends." },
 ];
 
-const igData = [
-  { img: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=400&q=70&auto=format&fit=crop" },
-  { img: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=70&auto=format&fit=crop" },
-  { img: "https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=400&q=70&auto=format&fit=crop" },
-  { img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=70&auto=format&fit=crop" },
-  { img: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=400&q=70&auto=format&fit=crop" },
-  { img: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=400&q=70&auto=format&fit=crop" },
-];
 
-/* ===========================================================
-   RENDER: hero images
-=========================================================== */
-document.getElementById('heroProductArt').innerHTML = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(
-  "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80&auto=format&fit=crop",
-  "Gold Plated Vanki Ring", "w-full h-full object-contain")}</div></div>`;
-document.getElementById('heroBustArt').innerHTML = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(
-  "https://images.unsplash.com/photo-1518391846015-55a9cc003b25?w=500&q=80&auto=format&fit=crop",
-  "Model wearing HAEINS jewellery", "w-full h-full object-cover")}</div></div>`;
-document.getElementById('heroBangleArt').innerHTML = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(
-  "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&q=80&auto=format&fit=crop",
-  "Gold bangle detail", "w-full h-full object-cover")}</div></div>`;
-document.getElementById('editorialArt').innerHTML = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(
-  "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=80&auto=format&fit=crop",
-  "Model wearing layered HAEINS necklaces", "w-full h-full object-cover")}</div></div>`;
+/* =================================================================
+   RENDER FUNCTIONS — nothing to edit below this line
+================================================================= */
 
-/* ===========================================================
-   RENDER: Categories
-=========================================================== */
+/* ── Hero images ── */
+document.getElementById('heroProductArt').innerHTML = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(HERO_IMAGES.heroProduct,"Gold Plated Vanki Ring","w-full h-full object-contain")}</div></div>`;
+document.getElementById('heroBustArt').innerHTML    = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(HERO_IMAGES.heroBust,"Model wearing HAEINS jewellery","w-full h-full object-cover")}</div></div>`;
+document.getElementById('heroBangleArt').innerHTML  = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(HERO_IMAGES.heroBangle,"Gold bangle detail","w-full h-full object-cover")}</div></div>`;
+document.getElementById('editorialArt').innerHTML   = `<div class="img-box w-full h-full"><div class="img-box-inner">${imgTag(HERO_IMAGES.editorial,"Model wearing layered HAEINS necklaces","w-full h-full object-cover")}</div></div>`;
+
+/* ── Categories ── */
 document.getElementById('categoryGrid').innerHTML = categories.map((c,i)=>`
   <a href="#" class="group reveal" style="transition-delay:${i*70}ms">
     <div class="rounded-[22px] overflow-hidden aspect-[4/5] img-zoom relative elegant-frame" style="background:var(--choc2);">
-      ${imgTag(c.img, c.name, "w-full h-full object-cover")}
+      ${imgTag(c.img, c.name, "w-full h-full object-cover absolute inset-0")}
       <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 55%,rgba(10,6,3,.65));"></div>
       <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-cream">
         <span class="serif italic text-lg">${c.name}</span>
@@ -149,21 +249,18 @@ document.getElementById('categoryGrid').innerHTML = categories.map((c,i)=>`
         </span>
       </div>
     </div>
-  </a>
-`).join('');
+  </a>`).join('');
 
-/* ===========================================================
-   RENDER: Products (cream chip-card, like the reference strip)
-=========================================================== */
+/* ── Best Sellers ── */
 let cartCount = 0;
 document.getElementById('productGrid').innerHTML = products.map((p,i)=>`
   <div class="group reveal rounded-[22px] p-3 md:p-4" style="background:var(--cream); transition-delay:${(i%4)*70}ms">
     <div class="relative rounded-[15px] overflow-hidden aspect-[4/5] mb-3 card-swap" style="border:1px solid rgba(51,20,26,.08);">
-      ${imgTag(p.img, p.name, "img-a w-full h-full object-cover absolute inset-0")}
-      ${imgTag(p.img2, p.name + " alternate view", "img-b w-full h-full object-cover absolute inset-0")}
+      ${imgTag(p.img,  p.name, "img-a w-full h-full object-cover absolute inset-0")}
+      ${imgTag(p.img2, p.name + " alternate", "img-b w-full h-full object-cover absolute inset-0")}
       <span class="absolute top-2.5 left-2.5 text-[9px] tracking-[0.1em] uppercase px-2.5 py-1 rounded-full z-10" style="background:rgba(21,14,9,.75); color:var(--cream);">${p.tag}</span>
       <button class="wishlist-btn absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-cream/90 flex items-center justify-center z-10 transition-transform hover:scale-110" aria-label="Add to wishlist">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#33141A" stroke-width="1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#241812" stroke-width="1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
       </button>
     </div>
     <div class="flex items-start justify-between gap-2">
@@ -179,24 +276,18 @@ document.getElementById('productGrid').innerHTML = products.map((p,i)=>`
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
       </button>
     </div>
-  </div>
-`).join('');
+  </div>`).join('');
 
-/* ===========================================================
-   RENDER: Benefits
-=========================================================== */
+/* ── Benefits ── */
 document.getElementById('benefitsGrid').innerHTML = benefits.map((b,i)=>`
   <div class="flex flex-col items-center text-center gap-3 reveal" style="transition-delay:${i*60}ms">
     <div class="w-14 h-14 rounded-full flex items-center justify-center" style="border:1px solid rgba(201,164,106,.5);">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A46A" stroke-width="1.4">${benefitIcons[b.icon]}</svg>
     </div>
     <p class="text-[12.5px] tracking-[0.06em] uppercase text-cream/80">${b.t}</p>
-  </div>
-`).join('');
+  </div>`).join('');
 
-/* ===========================================================
-   RENDER: Collections bento
-=========================================================== */
+/* ── Collections ── */
 const cg = document.getElementById('collectionGrid');
 cg.innerHTML = `
   <div class="md:col-span-3 md:row-span-2 rounded-[26px] overflow-hidden relative min-h-[280px] md:min-h-full img-zoom reveal elegant-frame">
@@ -217,23 +308,17 @@ cg.innerHTML = `
     ${imgTag(c.img, c.name, "absolute inset-0 w-full h-full object-cover")}
     <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 30%,rgba(10,6,3,.6));"></div>
     <div class="absolute bottom-5 left-5 text-cream"><p class="serif italic text-lg">${c.name}</p></div>
-  </div>`).join('')}
-`;
+  </div>`).join('')}`;
 
-/* ===========================================================
-   RENDER: Instagram grid
-=========================================================== */
+/* ── Instagram grid ── */
 document.getElementById('igGrid').innerHTML = igData.map((d,i)=>`
-  <a href="#" class="img-zoom rounded-[16px] overflow-hidden aspect-square block reveal elegant-frame-sm" style="transition-delay:${i*50}ms">
+  <a href="${d.href||'#'}" class="img-zoom rounded-[16px] overflow-hidden aspect-square block reveal elegant-frame-sm" style="transition-delay:${i*50}ms">
     ${imgTag(d.img, `HAEINS Instagram post ${i+1}`, "w-full h-full object-cover")}
-  </a>
-`).join('');
+  </a>`).join('');
 
-/* ===========================================================
-   RENDER: Testimonials slider
-=========================================================== */
+/* ── Testimonials ── */
 const testiTrack = document.getElementById('testiTrack');
-const testiDots = document.getElementById('testiDots');
+const testiDots  = document.getElementById('testiDots');
 testiTrack.innerHTML = testimonials.map(t=>`
   <div class="min-w-full px-2 md:px-10">
     <div class="flex items-center justify-center gap-1 mb-6">
@@ -241,8 +326,7 @@ testiTrack.innerHTML = testimonials.map(t=>`
     </div>
     <p class="serif italic text-xl md:text-2xl leading-snug text-ink mb-7">&ldquo;${t.text}&rdquo;</p>
     <p class="text-[13px] tracking-[0.05em] uppercase text-ink/50">${t.name} <span class="mx-1">·</span> ${t.role}</p>
-  </div>
-`).join('');
+  </div>`).join('');
 
 let testiIndex = 0;
 function renderDots(){
@@ -264,11 +348,9 @@ let testiTimer = setInterval(()=>goToTesti(testiIndex+1), 5500);
 testiTrack.addEventListener('mouseenter', ()=>clearInterval(testiTimer));
 testiTrack.addEventListener('mouseleave', ()=>{ testiTimer = setInterval(()=>goToTesti(testiIndex+1), 5500); });
 
-/* ===========================================================
-   INTERACTIONS
-=========================================================== */
-const cartCountEl = document.getElementById('cartCount');
-const mobileCartBar = document.getElementById('mobileCartBar');
+/* ── Interactions ── */
+const cartCountEl    = document.getElementById('cartCount');
+const mobileCartBar  = document.getElementById('mobileCartBar');
 const mobileCartLabel = document.getElementById('mobileCartLabel');
 const toast = document.getElementById('toast');
 let toastTimer;
@@ -287,13 +369,13 @@ function addToCart(name){
   showToast(`${name} added to cart`);
 }
 document.addEventListener('click', e=>{
-  const addBtn = e.target.closest('.quick-add-btn');
+  const addBtn  = e.target.closest('.quick-add-btn');
   if(addBtn){ addToCart(addBtn.dataset.name); }
   const wishBtn = e.target.closest('.wishlist-btn');
   if(wishBtn){
     const svg = wishBtn.querySelector('svg');
     const active = svg.getAttribute('fill') === '#C9A46A';
-    svg.setAttribute('fill', active ? 'none' : '#C9A46A');
+    svg.setAttribute('fill',   active ? 'none'    : '#C9A46A');
     svg.setAttribute('stroke', active ? '#33141A' : '#C9A46A');
     showToast(active ? 'Removed from wishlist' : 'Added to wishlist');
   }
@@ -305,8 +387,9 @@ document.getElementById('newsForm').addEventListener('submit', e=>{
   e.target.reset();
 });
 
+/* ── Nav scroll shrink ── */
 const navInner = document.getElementById('navInner');
-const navbar = document.getElementById('navbar');
+const navbar   = document.getElementById('navbar');
 window.addEventListener('scroll', ()=>{
   if(window.scrollY > 40){
     navInner.classList.remove('py-5'); navInner.classList.add('py-3.5');
@@ -317,7 +400,8 @@ window.addEventListener('scroll', ()=>{
   }
 });
 
-const menuBtn = document.getElementById('menuBtn');
+/* ── Mobile menu ── */
+const menuBtn   = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 let menuOpen = false;
 menuBtn.addEventListener('click', ()=>{
@@ -328,6 +412,7 @@ mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{
   menuOpen = false; mobileMenu.style.maxHeight = '0px';
 }));
 
+/* ── Scroll reveal ── */
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in'); } });
 }, { threshold: 0.15 });
@@ -336,6 +421,7 @@ setTimeout(()=>{
   document.querySelectorAll('.reveal:not(.in), .reveal-scale:not(.in)').forEach(el=>io.observe(el));
 }, 50);
 
+/* ── Loader hide ── */
 window.addEventListener('load', ()=>{
   setTimeout(()=>document.getElementById('loader').classList.add('hide'), 500);
 });
