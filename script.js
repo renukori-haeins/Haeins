@@ -30,6 +30,13 @@
      product shot.
 ================================================================= */
 
+const HERO_SLIDER_IMAGES = [
+  { img: "images/hero/hero-product-1.jpg", label: "Aura Vanki Ring" },
+  { img: "images/hero/hero-product-2.jpg", label: "Lune Hoop Earrings" },
+  { img: "images/hero/hero-product-3.jpg", label: "Solstice Necklace" },
+  // Add more lines here — dots update automatically
+];
+
 const FALLBACK_IMG = "images/fallback.jpg";
 // ↑ Replace with your own fallback photo path or URL.
 //   Until you do, the site falls back to a plain transparent GIF.
