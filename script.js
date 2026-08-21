@@ -21,15 +21,24 @@ const EDITORIAL   = "https://images.unsplash.com/photo-1487412720507-e7ab37603c6
 /* CATEGORIES */
 const categories = [
   { name:"Rings",            img:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&q=80&auto=format&fit=crop" },
+  { name:"Thumb Rings",      img:"https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=500&q=80&auto=format&fit=crop" },
+  { name:"Vanki Rings",      img:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500&q=80&auto=format&fit=crop" },
+  { name:"Necklaces",        img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=80&auto=format&fit=crop" },
   { name:"Earrings",         img:"https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=500&q=80&auto=format&fit=crop" },
+  { name:"Nose Pins",        img:"https://images.unsplash.com/photo-1631982690223-8aa4c6e0b3f9?w=500&q=80&auto=format&fit=crop" },
   { name:"Bracelets",        img:"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&q=80&auto=format&fit=crop" },
+  { name:"Statement Bangles",img:"https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=500&q=80&auto=format&fit=crop" },
 ];
 
 /* BEST SELLERS — img = front photo, img2 = hover photo */
 const products = [
+  { name:"Aura Vanki Ring",      tag:"Ring",     price:"₹1,890", rating:4.9, img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80&auto=format&fit=crop" },
   { name:"Lune Hoop Earrings",   tag:"Earrings", price:"₹1,450", rating:4.8, img:"https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1602752250015-52934bc45613?w=600&q=80&auto=format&fit=crop" },
+  { name:"Solstice Necklace",    tag:"Necklace", price:"₹2,290", rating:5.0, img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=80&auto=format&fit=crop" },
+  { name:"Petal Nose Pin",       tag:"Nose Pin", price:"₹890",   rating:4.7, img:"https://images.unsplash.com/photo-1631982690223-8aa4c6e0b3f9?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=600&q=80&auto=format&fit=crop" },
   { name:"Coil Thumb Ring",      tag:"Ring",     price:"₹1,190", rating:4.9, img:"https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80&auto=format&fit=crop" },
   { name:"Meridian Bracelet",    tag:"Bracelet", price:"₹1,690", rating:4.8, img:"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=600&q=80&auto=format&fit=crop" },
+  { name:"Dune Statement Bangle",tag:"Bangle",   price:"₹2,690", rating:4.9, img:"https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=600&q=80&auto=format&fit=crop" },
   { name:"Halo Studs",           tag:"Earrings", price:"₹990",   rating:4.9, img:"https://images.unsplash.com/photo-1518391846015-55a9cc003b25?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600&q=80&auto=format&fit=crop" },
 ];
 
@@ -99,12 +108,11 @@ function img(src,alt,cls){
   let cur=0, timer;
 
   track.innerHTML = HERO_SLIDES.map((s,i)=>`
-    <div style="min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:6px;">
-      <div class="img-box" style="width:100%;height:100%;max-height:260px;display:flex;align-items:center;justify-content:center;background:var(--cream-dim);">
-        <div class="img-box-inner" style="display:flex;align-items:center;justify-content:center;height:220px;">
-          <img src="${s.img}" alt="${s.label}" style="width:100%;height:100%;object-fit:contain;" loading="${i===0?'eager':'lazy'}" onerror="this.onerror=null;this.src='${FB}';">
-        </div>
-      </div>
+    <div style="min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--cream-dim);">
+      <img src="${s.img}" alt="${s.label}"
+        style="width:100%;height:100%;object-fit:cover;display:block;"
+        loading="${i===0?'eager':'lazy'}"
+        onerror="this.onerror=null;this.src='${FB}';">
     </div>`).join('');
 
   function dots(){
