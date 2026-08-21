@@ -7,8 +7,8 @@
 
 /* HERO SLIDER — add as many slides as you like */
 const HERO_SLIDES = [
-  { img:"https://drive.google.com/file/d/1b68Kc2fRqFJpmpTYaD0IvAtIJsXMSvcn/view?usp=sharing", label:"Lustre Wave Earrings" },
-  { img:"https://drive.google.com/file/d/1v6biDx0al9t2WtfVVIcp-kMwmP3U3QgS/view?usp=drive_link", label:"Lune Hoop Earrings" },
+  { img:"https://iili.io/CZ2myla.jpg", label:"Lustre Wave Earrings" },
+  { img:"https://iili.io/CZ2p9UJ.jpg", label:"Lune Hoop Earrings" },
   { img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=700&q=85&auto=format&fit=crop", label:"Solstice Necklace" },
   // ↑ REPLACE with your product images. Add more lines freely.
 ];
