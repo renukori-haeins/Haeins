@@ -5,41 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>HAEINS by Renu Kori — Everyday Luxury, Made to Last</title>
 <meta name="description" content="Demi-fine jewellery in premium stainless steel with luxurious gold plating. Sweat-proof, anti-tarnish, waterproof — made for everyday wear." />
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
         colors: {
-          choc: '#2B0A10',
-          choc2: '#47141B',
-          choc3: '#5C1D26',
-          terracotta: '#D98CA0',
-          terracottaDeep: '#B65C74',
-          cream: '#F8EDEA',
-          creamDim: '#F0D9DA',
-          ink: '#33141A',
-          gold: '#C9A46A',
-          goldSoft: '#E8CB98',
+          choc:'#2B0A10', choc2:'#47141B', choc3:'#5C1D26',
+          terracotta:'#D98CA0', terracottaDeep:'#B65C74',
+          cream:'#F8EDEA', creamDim:'#F0D9DA',
+          ink:'#33141A', gold:'#C9A46A', goldSoft:'#E8CB98',
         },
-        fontFamily: {
-          serif: ['"Cormorant Garamond"', 'serif'],
-          sans: ['Inter', 'sans-serif'],
-        },
+        fontFamily: { serif:['"Cormorant Garamond"','serif'], sans:['Inter','sans-serif'] },
       }
     }
   }
 </script>
-
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased">
-
 <div class="grain" style="position:fixed;"></div>
 
 <!-- LOADER -->
@@ -52,27 +39,22 @@
 
 <div class="toast" id="toast">Added to cart</div>
 
-<!-- ============ NAVBAR ============ -->
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" style="background:rgba(21,14,9,0.86); backdrop-filter:blur(10px);">
+<!-- NAVBAR -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" style="background:rgba(21,14,9,0.88);backdrop-filter:blur(10px);">
   <div class="max-w-7xl mx-auto px-5 md:px-10">
     <div id="navInner" class="flex items-center justify-between transition-all duration-500 py-5">
       <button id="menuBtn" class="md:hidden flex flex-col gap-[5px] w-6" aria-label="Open menu">
-        <span class="h-px w-full bg-cream"></span>
-        <span class="h-px w-4 bg-cream"></span>
-        <span class="h-px w-full bg-cream"></span>
+        <span class="h-px w-full bg-cream"></span><span class="h-px w-4 bg-cream"></span><span class="h-px w-full bg-cream"></span>
       </button>
-
       <nav class="hidden md:flex items-center gap-9 text-[13px] tracking-[0.08em] uppercase text-cream/85">
         <a href="#shop" class="navlink">Shop</a>
         <a href="#collections" class="navlink">Collections</a>
         <a href="#new" class="navlink">New Arrivals</a>
       </nav>
-
       <a href="#top" class="text-center leading-none select-none">
         <span class="serif text-[26px] md:text-[30px] tracking-[0.14em] text-cream">HAEINS</span>
         <span class="block text-[9px] tracking-[0.32em] uppercase text-gold/80 mt-0.5">by Renu Kori</span>
       </a>
-
       <div class="flex items-center gap-5">
         <nav class="hidden md:flex items-center gap-9 text-[13px] tracking-[0.08em] uppercase text-cream/85">
           <a href="#about" class="navlink">About</a>
@@ -93,43 +75,29 @@
       </div>
     </div>
   </div>
-
   <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-all duration-500" style="background:var(--choc);">
     <nav class="flex flex-col px-8 pb-8 pt-2 gap-5 text-[13px] tracking-[0.1em] uppercase text-cream/85 border-t border-cream/10">
-      <a href="#shop">Shop</a>
-      <a href="#collections">Collections</a>
-      <a href="#new">New Arrivals</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#shop">Shop</a><a href="#collections">Collections</a><a href="#new">New Arrivals</a><a href="#about">About</a><a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<!-- ============ HERO ============ -->
+<!-- HERO -->
 <section id="top" class="relative pt-32 md:pt-40 pb-10 px-5 md:px-10 max-w-7xl mx-auto">
-
-  <!-- row A -->
   <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
-    <div class="md:col-span-7 rounded-[28px] p-8 md:p-14 flex flex-col justify-between min-h-[360px] md:min-h-[480px] relative overflow-hidden reveal-scale" style="background:var(--choc2); border:1px solid rgba(248,237,234,.06);">
+    <!-- Left: headline tile -->
+    <div class="md:col-span-7 rounded-[28px] p-8 md:p-14 flex flex-col justify-between min-h-[360px] md:min-h-[480px] relative overflow-hidden reveal-scale" style="background:var(--choc2);border:1px solid rgba(248,237,234,.06);">
       <svg class="absolute -right-16 -bottom-16 opacity-[.5]" width="340" height="340" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49" fill="none" stroke="#F8EDEA" stroke-opacity="0.05" stroke-width="0.6"/><circle cx="50" cy="50" r="38" fill="none" stroke="#F8EDEA" stroke-opacity="0.05" stroke-width="0.6"/></svg>
-
       <p class="text-[10px] tracking-[0.32em] uppercase text-gold/90">Demi-Fine · Handcrafted for Everyday</p>
-
       <div class="my-8">
         <h1 class="serif text-[42px] leading-[1.05] md:text-[64px] md:leading-[1.04] text-cream">
           Everyday
-          <span class="inline-block align-middle mx-1 md:mx-2" style="width:.85em;">
-            <svg viewBox="0 0 40 40" fill="none" stroke="#C9A46A" stroke-width="1.4"><circle cx="20" cy="23" r="9"/><path d="M20 12 16 6 20 2 24 6Z"/></svg>
-          </span>
+          <span class="inline-block align-middle mx-1 md:mx-2" style="width:.85em;"><svg viewBox="0 0 40 40" fill="none" stroke="#C9A46A" stroke-width="1.4"><circle cx="20" cy="23" r="9"/><path d="M20 12 16 6 20 2 24 6Z"/></svg></span>
           luxury,<br class="hidden md:block">
           <span class="italic font-light">made to last.</span>
         </h1>
-        <p class="text-[15px] leading-relaxed text-cream/65 max-w-md mt-6">
-          Sweat-proof. Anti-tarnish. Waterproof. Crafted in premium stainless steel with luxurious
-          gold plating — for women who live in their jewellery, not around it.
-        </p>
+        <p class="text-[15px] leading-relaxed text-cream/65 max-w-md mt-6">Sweat-proof. Anti-tarnish. Waterproof. Crafted in premium stainless steel with luxurious gold plating — for women who live in their jewellery, not around it.</p>
       </div>
-
       <div class="flex items-center gap-4">
         <a href="#shop" class="btn-primary px-7 py-3.5 rounded-full text-[12px] uppercase inline-block">Shop Collection</a>
         <a href="#bestsellers" class="icon-circle" aria-label="Explore best sellers">
@@ -137,48 +105,49 @@
         </a>
       </div>
     </div>
-
-    <!-- right cream product tile -->
-    <div class="md:col-span-5 rounded-[28px] p-8 md:p-10 flex flex-col items-center justify-between min-h-[300px] md:min-h-[480px] reveal" style="background:var(--cream); transition-delay:.1s;">
-      <div class="w-full flex items-start justify-between">
+    <!-- Right: hero image SLIDER tile -->
+    <div class="md:col-span-5 rounded-[28px] p-6 md:p-8 flex flex-col items-center justify-between min-h-[340px] md:min-h-[480px] reveal" style="background:var(--cream);transition-delay:.1s;">
+      <div class="w-full flex items-start justify-between mb-2">
         <div>
           <p class="text-[10px] tracking-[0.28em] uppercase text-ink/50">Premium Grade</p>
-          <p class="serif italic text-2xl md:text-3xl text-ink mt-1">Gold Plated Vanki Ring</p>
+          <p id="heroSliderLabel" class="serif italic text-xl md:text-2xl text-ink mt-1">Gold Plated Vanki Ring</p>
         </div>
         <span class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style="background:var(--terracotta);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F8EDEA" stroke-width="1.6"><path d="M6 3h12l4 6-10 12L2 9Z"/></svg>
         </span>
       </div>
-
-      <div id="heroProductArt" class="w-44 h-44 md:w-56 md:h-56 my-6"></div>
-
-      <div class="flex items-center gap-2">
-        <span class="w-6 h-1.5 rounded-full" style="background:var(--ink);"></span>
-        <span class="w-1.5 h-1.5 rounded-full" style="background:rgba(51,20,26,.3);"></span>
-        <span class="w-1.5 h-1.5 rounded-full" style="background:rgba(51,20,26,.3);"></span>
+      <!-- slider track -->
+      <div class="relative w-full flex-1 my-3" style="min-height:220px;">
+        <div id="heroSliderTrack"></div>
+        <!-- Prev -->
+        <button id="heroSliderPrev" aria-label="Previous" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-8 h-8 rounded-full flex items-center justify-center z-10 transition-all hover:scale-110" style="background:var(--ink);color:var(--cream);box-shadow:0 4px 14px rgba(51,20,26,.3);">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <!-- Next -->
+        <button id="heroSliderNext" aria-label="Next" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-8 h-8 rounded-full flex items-center justify-center z-10 transition-all hover:scale-110" style="background:var(--ink);color:var(--cream);box-shadow:0 4px 14px rgba(51,20,26,.3);">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
+      <!-- dots -->
+      <div id="heroSliderDots" class="flex items-center gap-2 pb-1 mt-1"></div>
     </div>
   </div>
 
-  <!-- row B: three tiles -->
+  <!-- row B -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mt-4 md:mt-5">
-
-    <div class="rounded-[24px] p-7 flex flex-col justify-between min-h-[210px] reveal" style="background:var(--cream); transition-delay:.15s;">
+    <div class="rounded-[24px] p-7 flex flex-col justify-between min-h-[210px] reveal" style="background:var(--cream);transition-delay:.15s;">
       <div class="flex items-center -space-x-3">
-        <span class="w-9 h-9 rounded-full border-2 flex items-center justify-center text-[11px] serif italic" style="background:var(--terracotta); color:var(--cream); border-color:var(--cream);">R</span>
-        <span class="w-9 h-9 rounded-full border-2 flex items-center justify-center" style="background:var(--gold); border-color:var(--cream);">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="#33141A" stroke="none"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
-        </span>
+        <span class="w-9 h-9 rounded-full border-2 flex items-center justify-center text-[11px] serif italic" style="background:var(--terracotta);color:var(--cream);border-color:var(--cream);">R</span>
+        <span class="w-9 h-9 rounded-full border-2 flex items-center justify-center" style="background:var(--gold);border-color:var(--cream);"><svg width="12" height="12" viewBox="0 0 24 24" fill="#33141A" stroke="none"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></span>
       </div>
       <div>
         <p class="text-ink text-[14.5px] leading-snug mb-3">Loved by 500+ women who wear HAEINS daily.</p>
         <a href="#about" class="text-[11px] tracking-[0.12em] uppercase text-ink/70 border-b border-ink/30 pb-0.5">Learn More →</a>
       </div>
     </div>
-
-    <div class="rounded-[24px] p-7 flex flex-col justify-between min-h-[210px] relative overflow-hidden reveal" style="background:linear-gradient(155deg, var(--terracotta), var(--terracotta-deep)); transition-delay:.2s;">
+    <div class="rounded-[24px] p-7 flex flex-col justify-between min-h-[210px] relative overflow-hidden reveal" style="background:linear-gradient(155deg,var(--terracotta),var(--terracotta-deep));transition-delay:.2s;">
       <svg class="absolute -left-10 -top-10 opacity-20" width="200" height="200" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49" fill="none" stroke="#F8EDEA" stroke-width="0.6"/></svg>
-      <button class="w-11 h-11 rounded-full flex items-center justify-center self-start relative" style="background:rgba(248,237,234,.16); backdrop-filter:blur(4px);" aria-label="Play brand film">
+      <button class="w-11 h-11 rounded-full flex items-center justify-center self-start relative" style="background:rgba(248,237,234,.16);backdrop-filter:blur(4px);" aria-label="Play brand film">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="#F8EDEA"><path d="M8 5v14l11-7z"/></svg>
       </button>
       <div class="relative">
@@ -186,15 +155,13 @@
         <p class="text-[10px] tracking-[0.28em] uppercase text-cream/85">18K Gold Plated</p>
       </div>
     </div>
-
-    <div class="rounded-[24px] p-7 flex flex-col justify-between min-h-[210px] relative overflow-hidden reveal" style="background:var(--choc2); border:1px solid rgba(248,237,234,.06); transition-delay:.25s;">
+    <div class="rounded-[24px] p-7 flex flex-col justify-between min-h-[210px] relative overflow-hidden reveal" style="background:var(--choc2);border:1px solid rgba(248,237,234,.06);transition-delay:.25s;">
       <p class="text-[10px] tracking-[0.28em] uppercase text-gold/85">Handpicked</p>
       <div id="heroBangleArt" class="w-full h-24 my-2"></div>
       <p class="serif italic text-lg text-cream">Designed by Renu Kori</p>
     </div>
   </div>
 
-  <!-- trust strip -->
   <div class="mt-10 md:mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[11px] tracking-[0.18em] uppercase text-cream/50 reveal">
     <span>Sweat Proof</span><span class="circle-mark opacity-40"></span>
     <span>Anti Tarnish</span><span class="circle-mark opacity-40"></span>
@@ -204,34 +171,30 @@
   </div>
 </section>
 
-<!-- ============ FEATURED CATEGORIES ============ -->
+<!-- CATEGORIES -->
 <section id="shop" class="max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32">
   <div class="flex items-end justify-between mb-10 md:mb-14 reveal">
     <h2 class="serif text-[34px] md:text-[46px] leading-[1.05] text-cream">Shop by <span class="italic text-gold">Category</span></h2>
-    <a href="#" class="hidden md:inline-flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase navlink text-cream/80">View All
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg>
-    </a>
+    <a href="#" class="hidden md:inline-flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase navlink text-cream/80">View All <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
   </div>
   <div id="categoryGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5"></div>
 </section>
 
-<!-- ============ BEST SELLERS ============ -->
+<!-- BEST SELLERS -->
 <section id="bestsellers" class="max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32">
   <div class="flex items-end justify-between mb-10 md:mb-14 reveal">
     <div>
       <p class="text-[11px] tracking-[0.28em] uppercase text-gold mb-3">Most Loved</p>
       <h2 class="serif text-[34px] md:text-[46px] leading-[1.05] text-cream">Best <span class="italic text-gold">Sellers</span></h2>
     </div>
-    <a href="#" class="hidden md:inline-flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase navlink text-cream/80">Shop All
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg>
-    </a>
+    <a href="#" class="hidden md:inline-flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase navlink text-cream/80">Shop All <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
   </div>
   <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5"></div>
 </section>
 
-<!-- ============ WHY HAEINS ============ -->
+<!-- WHY HAEINS -->
 <section id="about" class="max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32">
-  <div class="rounded-[32px] px-6 py-16 md:px-16 md:py-20 relative overflow-hidden reveal-scale" style="background:var(--choc2); border:1px solid rgba(248,237,234,.06);">
+  <div class="rounded-[32px] px-6 py-16 md:px-16 md:py-20 relative overflow-hidden reveal-scale" style="background:var(--choc2);border:1px solid rgba(248,237,234,.06);">
     <svg class="absolute -right-10 -top-10 opacity-[.08]" width="360" height="360" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49" fill="none" stroke="white" stroke-width="0.5"/><circle cx="50" cy="50" r="38" fill="none" stroke="white" stroke-width="0.5"/></svg>
     <div class="text-center mb-14 relative">
       <p class="text-[11px] tracking-[0.3em] uppercase text-gold mb-3">The HAEINS Promise</p>
@@ -241,26 +204,23 @@
   </div>
 </section>
 
-<!-- ============ EDITORIAL BANNER ============ -->
+<!-- EDITORIAL BANNER -->
 <section class="max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32">
-  <div class="relative rounded-[32px] overflow-hidden min-h-[440px] md:min-h-[560px] reveal-scale" style="background:linear-gradient(135deg, var(--terracotta) 0%, var(--terracotta-deep) 100%);">
+  <div class="relative rounded-[32px] overflow-hidden min-h-[440px] md:min-h-[560px] reveal-scale" style="background:linear-gradient(135deg,var(--terracotta) 0%,var(--terracotta-deep) 100%);">
     <svg class="absolute inset-0 w-full h-full opacity-[.12]" preserveAspectRatio="xMidYMid slice" viewBox="0 0 800 600"><circle cx="620" cy="150" r="220" fill="none" stroke="#F8EDEA" stroke-width="1"/><circle cx="620" cy="150" r="160" fill="none" stroke="#F8EDEA" stroke-width="1"/><circle cx="120" cy="520" r="180" fill="none" stroke="#F8EDEA" stroke-width="1"/></svg>
     <div class="relative h-full flex flex-col md:flex-row items-center px-8 md:px-16 py-16 gap-10">
       <div class="max-w-md text-cream">
         <p class="text-[11px] tracking-[0.3em] uppercase text-cream/70 mb-4">The Editorial</p>
         <h2 class="serif text-[38px] md:text-[52px] leading-[1.05] mb-6">Jewellery That <span class="italic">Moves</span> With You</h2>
-        <p class="text-[15px] leading-relaxed text-cream/80 mb-8">
-          From your morning coffee run to a candlelit dinner — HAEINS pieces are built to stay on.
-          No tarnish, no green fingers, no taking off before a shower. Just quiet, everyday elegance.
-        </p>
-        <a href="#shop" class="inline-block px-8 py-3.5 rounded-full text-[12px] uppercase tracking-[0.06em]" style="background:var(--cream); color:var(--ink);">Shop Now</a>
+        <p class="text-[15px] leading-relaxed text-cream/80 mb-8">From your morning coffee run to a candlelit dinner — HAEINS pieces are built to stay on. No tarnish, no green fingers, no taking off before a shower. Just quiet, everyday elegance.</p>
+        <a href="#shop" class="inline-block px-8 py-3.5 rounded-full text-[12px] uppercase tracking-[0.06em]" style="background:var(--cream);color:var(--ink);">Shop Now</a>
       </div>
       <div id="editorialArt" class="w-full md:w-72 h-56 md:h-80 flex-shrink-0"></div>
     </div>
   </div>
 </section>
 
-<!-- ============ COLLECTIONS ============ -->
+<!-- COLLECTIONS -->
 <section id="collections" class="max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32">
   <div class="text-center mb-12 md:mb-16 reveal">
     <p class="text-[11px] tracking-[0.28em] uppercase text-gold mb-3">Curated Edits</p>
@@ -269,20 +229,17 @@
   <div id="collectionGrid" class="grid grid-cols-2 md:grid-cols-6 md:grid-rows-2 gap-4 md:gap-5"></div>
 </section>
 
-<!-- ============ TESTIMONIALS ============ -->
+<!-- TESTIMONIALS -->
 <section class="max-w-5xl mx-auto px-5 md:px-10 pt-24 md:pt-32 text-center">
   <p class="text-[11px] tracking-[0.28em] uppercase text-gold mb-3 reveal">Loved By Thousands</p>
   <h2 class="serif text-[34px] md:text-[46px] mb-14 text-cream reveal">What Our <span class="italic text-gold">Circle</span> Says</h2>
-
   <div class="rounded-[28px] p-8 md:p-14 reveal-scale" style="background:var(--cream);">
-    <div class="relative overflow-hidden">
-      <div id="testiTrack" class="flex transition-transform duration-700 ease-out"></div>
-    </div>
+    <div class="relative overflow-hidden"><div id="testiTrack" class="flex transition-transform duration-700 ease-out"></div></div>
     <div id="testiDots" class="flex items-center justify-center gap-2 mt-8"></div>
   </div>
 </section>
 
-<!-- ============ INSTAGRAM GALLERY ============ -->
+<!-- INSTAGRAM -->
 <section id="new" class="max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32">
   <div class="text-center mb-10 md:mb-14 reveal">
     <p class="text-[11px] tracking-[0.28em] uppercase text-gold mb-3">@haeins.jewellery</p>
@@ -291,22 +248,22 @@
   <div id="igGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4"></div>
 </section>
 
-<!-- ============ NEWSLETTER ============ -->
+<!-- NEWSLETTER -->
 <section class="max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32">
-  <div class="rounded-[32px] px-6 py-16 md:py-20 text-center relative overflow-hidden reveal-scale" style="background:linear-gradient(135deg, var(--terracotta), var(--terracotta-deep));">
+  <div class="rounded-[32px] px-6 py-16 md:py-20 text-center relative overflow-hidden reveal-scale" style="background:linear-gradient(135deg,var(--terracotta),var(--terracotta-deep));">
     <svg class="absolute -right-16 -bottom-16 opacity-[.15]" width="300" height="300" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49" fill="none" stroke="#F8EDEA" stroke-width="0.6"/></svg>
     <span class="circle-mark sparkle text-cream text-2xl mb-3 inline-block"></span>
     <h2 class="serif text-[32px] md:text-[46px] leading-[1.1] mb-4 text-cream">Join the <span class="italic">HAEINS Circle</span></h2>
     <p class="text-[15px] text-cream/80 max-w-md mx-auto mb-9">Early access to new drops, styling notes from Renu, and 10% off your first order.</p>
     <form id="newsForm" class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto relative">
       <input required type="email" placeholder="Your email address" class="w-full sm:flex-1 bg-cream/10 border border-cream/40 rounded-full px-6 py-3.5 text-sm text-cream placeholder:text-cream/60" />
-      <button type="submit" class="px-8 py-3.5 rounded-full text-[12px] uppercase w-full sm:w-auto" style="background:var(--cream); color:var(--ink);">Subscribe</button>
+      <button type="submit" class="px-8 py-3.5 rounded-full text-[12px] uppercase w-full sm:w-auto" style="background:var(--cream);color:var(--ink);">Subscribe</button>
     </form>
     <p id="newsMsg" class="text-[12px] text-cream mt-4 h-4 relative"></p>
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
+<!-- FOOTER -->
 <footer id="contact" class="max-w-7xl mx-auto px-5 md:px-10 pt-24 pb-12 mt-4">
   <div class="grid grid-cols-2 md:grid-cols-5 gap-10 pb-14 border-b border-cream/10">
     <div class="col-span-2">
@@ -348,43 +305,22 @@
   </div>
 </footer>
 
+<!-- Mobile cart bar -->
 <div id="mobileCartBar" class="fixed bottom-0 left-0 right-0 md:hidden text-ink px-5 py-4 flex items-center justify-between translate-y-full transition-transform duration-500 z-40" style="background:var(--gold);">
   <span class="text-[12px] tracking-[0.1em] uppercase" id="mobileCartLabel">0 items</span>
   <a href="#" class="text-[12px] tracking-[0.1em] uppercase border-b border-ink/50 pb-0.5">View Cart</a>
 </div>
 
-<!-- ============ FLOATING CONTACT WIDGET ============
-     Edit the WhatsApp link (wa.me/<countrycode+number>, no + or spaces) and
-     the tel: link below with your real number. This widget is position:fixed,
-     so it stays visible on every section as the page scrolls. -->
-<div id="contactFab" class="fixed right-5 md:right-7 bottom-[104px] md:bottom-7 z-40 flex flex-col items-end gap-3">
-
-  <!-- WhatsApp -->
-  <a href="https://wa.me/919999999999?text=Hi%20HAEINS%2C%20I%27d%20love%20to%20know%20more%20about%20your%20jewellery."
-     target="_blank" rel="noopener noreferrer"
-     aria-label="Chat with HAEINS on WhatsApp"
-     class="group relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-110"
-     style="background:#25D366;">
-    <span class="absolute inset-0 rounded-full animate-ping" style="background:#25D366; opacity:.35;"></span>
-    <svg class="relative" width="26" height="26" viewBox="0 0 32 32" fill="#fff">
-      <path d="M16.001 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.257.594 4.375 1.63 6.211L3.2 28.8l6.79-1.783a12.74 12.74 0 0 0 6.011 1.53h.006c7.06 0 12.8-5.74 12.8-12.8S23.062 3.2 16.001 3.2zm7.51 18.302c-.318.894-1.578 1.634-2.58 1.85-.686.146-1.582.263-4.6-.986-3.864-1.6-6.354-5.53-6.548-5.79-.19-.26-1.57-2.09-1.57-3.99 0-1.9.995-2.834 1.348-3.222.318-.35.694-.437.925-.437.232 0 .463.002.665.012.213.01.5-.08.782.596.318.766 1.078 2.646 1.174 2.838.096.192.16.416.032.672-.128.256-.192.416-.38.64-.19.224-.398.5-.568.672-.192.192-.392.4-.168.784.224.384.994 1.64 2.134 2.656 1.466 1.307 2.702 1.712 3.086 1.904.384.192.608.16.832-.096.224-.256.958-1.118 1.214-1.502.256-.384.512-.32.864-.192.352.128 2.238 1.056 2.622 1.248.384.192.64.288.734.448.096.16.096.928-.222 1.822z"/>
-    </svg>
-    <span class="pointer-events-none absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] tracking-[0.04em] opacity-0 translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" style="background:var(--ink); color:var(--cream);">
-      Chat on WhatsApp
-    </span>
+<!-- Floating contact -->
+<div class="fixed right-5 md:right-7 bottom-[104px] md:bottom-7 z-40 flex flex-col items-end gap-3">
+  <a href="https://wa.me/919999999999?text=Hi%20HAEINS%2C%20I%27d%20love%20to%20know%20more%20about%20your%20jewellery." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" class="group relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-110" style="background:#25D366;">
+    <span class="absolute inset-0 rounded-full animate-ping" style="background:#25D366;opacity:.35;"></span>
+    <svg class="relative" width="26" height="26" viewBox="0 0 32 32" fill="#fff"><path d="M16.001 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.257.594 4.375 1.63 6.211L3.2 28.8l6.79-1.783a12.74 12.74 0 0 0 6.011 1.53h.006c7.06 0 12.8-5.74 12.8-12.8S23.062 3.2 16.001 3.2zm7.51 18.302c-.318.894-1.578 1.634-2.58 1.85-.686.146-1.582.263-4.6-.986-3.864-1.6-6.354-5.53-6.548-5.79-.19-.26-1.57-2.09-1.57-3.99 0-1.9.995-2.834 1.348-3.222.318-.35.694-.437.925-.437.232 0 .463.002.665.012.213.01.5-.08.782.596.318.766 1.078 2.646 1.174 2.838.096.192.16.416.032.672-.128.256-.192.416-.38.64-.19.224-.398.5-.568.672-.192.192-.392.4-.168.784.224.384.994 1.64 2.134 2.656 1.466 1.307 2.702 1.712 3.086 1.904.384.192.608.16.832-.096.224-.256.958-1.118 1.214-1.502.256-.384.512-.32.864-.192.352.128 2.238 1.056 2.622 1.248.384.192.64.288.734.448.096.16.096.928-.222 1.822z"/></svg>
+    <span class="pointer-events-none absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] opacity-0 translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" style="background:var(--ink);color:var(--cream);">Chat on WhatsApp</span>
   </a>
-
-  <!-- Call -->
-  <a href="tel:+919999999999"
-     aria-label="Call HAEINS"
-     class="group relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-110"
-     style="background:var(--ink); border:1px solid rgba(248,237,234,.15);">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.08-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
-    </svg>
-    <span class="pointer-events-none absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] tracking-[0.04em] opacity-0 translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" style="background:var(--ink); color:var(--cream);">
-      Call +91 99999 99999
-    </span>
+  <a href="tel:+919999999999" aria-label="Call HAEINS" class="group relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-110" style="background:var(--ink);border:1px solid rgba(248,237,234,.15);">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.08-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <span class="pointer-events-none absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] opacity-0 translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" style="background:var(--ink);color:var(--cream);">Call +91 99999 99999</span>
   </a>
 </div>
 
