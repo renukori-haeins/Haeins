@@ -7,8 +7,8 @@
 
 /* HERO SLIDER — add as many slides as you like */
 const HERO_SLIDES = [
-  { img:"https://iili.io/CZ2myla.jpg", label:"Lustre Wave Earrings" },
-  { img:"https://iili.io/CZ2p9UJ.jpg", label:"Lune Hoop Earrings" },
+  { img:"Haeins/Lustre Wave.jpeg", label:"Lustre Wave Earrings" },
+  { img:"Haeins/Rain Drop.jpeg", label:"Rain Drop Earrings" },
   { img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=700&q=85&auto=format&fit=crop", label:"Solstice Necklace" },
   // ↑ REPLACE with your product images. Add more lines freely.
 ];
