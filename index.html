@@ -106,7 +106,7 @@
       </div>
     </div>
     <!-- Right: hero image SLIDER tile -->
-    <div class="md:col-span-5 rounded-[28px] p-6 md:p-8 flex flex-col items-center justify-between min-h-[340px] md:min-h-[480px] reveal" style="background:var(--cream);transition-delay:.1s;">
+    <div class="md:col-span-5 rounded-[28px] p-6 md:p-8 flex flex-col items-center justify-between min-h-[340px] md:min-h-[480px] reveal overflow-hidden" style="background:var(--cream);transition-delay:.1s;">
       <div class="w-full flex items-start justify-between mb-2">
         <div>
           <p class="text-[10px] tracking-[0.28em] uppercase text-ink/50">Premium Grade</p>
@@ -116,18 +116,26 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F8EDEA" stroke-width="1.6"><path d="M6 3h12l4 6-10 12L2 9Z"/></svg>
         </span>
       </div>
-      <!-- slider track -->
-      <div class="relative w-full flex-1 my-3" style="min-height:220px;">
-        <div id="heroSliderTrack"></div>
-        <!-- Prev -->
-        <button id="heroSliderPrev" aria-label="Previous" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-8 h-8 rounded-full flex items-center justify-center z-10 transition-all hover:scale-110" style="background:var(--ink);color:var(--cream);box-shadow:0 4px 14px rgba(51,20,26,.3);">
+
+      <!-- slider track — overflow clipped, arrows sit inside -->
+      <div class="relative w-full flex-1 my-3 overflow-hidden rounded-[18px]" style="min-height:220px; max-height:320px;">
+        <div id="heroSliderTrack" style="border-radius:14px;"></div>
+
+        <!-- Prev — inside left edge -->
+        <button id="heroSliderPrev" aria-label="Previous"
+          class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center z-10 transition-all hover:scale-110"
+          style="background:var(--ink);color:var(--cream);box-shadow:0 4px 14px rgba(51,20,26,.35);">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <!-- Next -->
-        <button id="heroSliderNext" aria-label="Next" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-8 h-8 rounded-full flex items-center justify-center z-10 transition-all hover:scale-110" style="background:var(--ink);color:var(--cream);box-shadow:0 4px 14px rgba(51,20,26,.3);">
+
+        <!-- Next — inside right edge -->
+        <button id="heroSliderNext" aria-label="Next"
+          class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center z-10 transition-all hover:scale-110"
+          style="background:var(--ink);color:var(--cream);box-shadow:0 4px 14px rgba(51,20,26,.35);">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
+
       <!-- dots -->
       <div id="heroSliderDots" class="flex items-center gap-2 pb-1 mt-1"></div>
     </div>
