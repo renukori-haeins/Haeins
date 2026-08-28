@@ -8,7 +8,7 @@
 /* HERO SLIDER — add as many slides as you like */
 const HERO_SLIDES = [
   { img:"Images/Lustre_Wave.jpeg", label:"Lustre Wave Earrings" },
-  { img:"Haeins/Images/Rain_Drop.jpeg", label:"Rain Drop Earrings" },
+  { img:"Images/Rain_Drop.jpeg", label:"Rain Drop Earrings" },
   { img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=700&q=85&auto=format&fit=crop", label:"Solstice Necklace" },
   // ↑ REPLACE with your product images. Add more lines freely.
 ];
@@ -21,18 +21,13 @@ const EDITORIAL   = "https://images.unsplash.com/photo-1487412720507-e7ab37603c6
 /* CATEGORIES */
 const categories = [
   { name:"Rings",            img:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&q=80&auto=format&fit=crop" },
-  { name:"Thumb Rings",      img:"https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=500&q=80&auto=format&fit=crop" },
-  { name:"Vanki Rings",      img:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500&q=80&auto=format&fit=crop" },
-  { name:"Necklaces",        img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=80&auto=format&fit=crop" },
   { name:"Earrings",         img:"https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=500&q=80&auto=format&fit=crop" },
-  { name:"Nose Pins",        img:"https://images.unsplash.com/photo-1631982690223-8aa4c6e0b3f9?w=500&q=80&auto=format&fit=crop" },
   { name:"Bracelets",        img:"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&q=80&auto=format&fit=crop" },
-  { name:"Statement Bangles",img:"https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=500&q=80&auto=format&fit=crop" },
 ];
 
 /* BEST SELLERS — img = front photo, img2 = hover photo */
 const products = [
-  { name:"Aura Vanki Ring",      tag:"Ring",     price:"₹1,890", rating:4.9, img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80&auto=format&fit=crop" },
+  { name:"Aurora Hammered Cuff Bracelet",      tag:"Bracelet",     price:"₹299", rating:4.9, img:"Images/Aurora_hammered_cuff bracelet_ 1.png",  img2:"Images/Aurora_hammered_cuff_bracelet_2.png" },
   { name:"Lune Hoop Earrings",   tag:"Earrings", price:"₹1,450", rating:4.8, img:"https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1602752250015-52934bc45613?w=600&q=80&auto=format&fit=crop" },
   { name:"Solstice Necklace",    tag:"Necklace", price:"₹2,290", rating:5.0, img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=80&auto=format&fit=crop" },
   { name:"Petal Nose Pin",       tag:"Nose Pin", price:"₹890",   rating:4.7, img:"https://images.unsplash.com/photo-1631982690223-8aa4c6e0b3f9?w=600&q=80&auto=format&fit=crop",  img2:"https://images.unsplash.com/photo-1620656798579-1984d9e87df7?w=600&q=80&auto=format&fit=crop" },
